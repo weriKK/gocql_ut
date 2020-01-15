@@ -13,7 +13,8 @@ func main() {
 		Keyspace:    "kovakeyspace",
 		Consistency: "LOCAL_QUORUM",
 	},
-		storage.CassandraSessionBuilder{})
+		storage.CassandraSessionBuilder{},
+	)
 
 	if err != nil {
 		log.Fatal(err)
