@@ -1,8 +1,8 @@
 package main
 
-import "log"
-
-import "casswrap/storage"
+import (
+	"casswrap/storage"
+	"log")
 
 func main() {
 	db, err := storage.NewCassandraService(storage.CassandraServiceConfig{

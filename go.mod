@@ -2,4 +2,7 @@ module casswrap
 
 go 1.13
 
-require github.com/gocql/gocql v0.0.0-20200115135732-617765adbe2d
+require (
+	github.com/gocql/gocql v0.0.0-20200115135732-617765adbe2d
+	github.com/stretchr/testify v1.4.0
+)

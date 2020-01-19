@@ -37,6 +37,14 @@ type SessionBuilder interface {
 type CassandraSessionBuilder struct{}
 
 func (csb CassandraSessionBuilder) build(cfg CassandraServiceConfig) (SessionWrapper, error) {
+
+	cluster := configureCluster(cfg)
+
+	session, err := cluster.CreateSession()
+	return NewCassandraSession(session), err
+}
+
+func configureCluster(cfg CassandraServiceConfig) *gocql.ClusterConfig {
 	cluster := gocql.NewCluster()
 	cluster.Hosts = []string{cfg.Host}
 	cluster.Port = cfg.Port
@@ -46,8 +54,7 @@ func (csb CassandraSessionBuilder) build(cfg CassandraServiceConfig) (SessionWra
 	}
 	cluster.Keyspace = cfg.Keyspace
 
-	session, err := cluster.CreateSession()
-	return NewCassandraSession(session), err
+	return cluster
 }
 
 func NewCassandraService(cfg CassandraServiceConfig, sessBuilder SessionBuilder) (StorageService, error) {
